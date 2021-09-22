@@ -4,6 +4,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
 import { Occupation } from '@app/_models/occupation';
 import { Rating } from '@app/_models/rating';
+import { Factor } from '@app/_models/factor';
+
 
 // array in local storage for registered users
 const usersKey = 'TalTestforDotnetDeveloper';
@@ -11,10 +13,13 @@ const usersJSON = localStorage.getItem(usersKey);
 let users: any[] = usersJSON ? JSON.parse(usersJSON) : [{
     id: 1,
     title: 'Mr',
-    firstName: 'Joe',
-    lastName: 'Bloggs',
-    email: 'joe@bloggs.cYom',    
-    occupation:Occupation.Author,    
+    firstName: 'Harish',
+    lastName: 'Mekwana',
+    email: 'harishdotnet@gmail.com',  
+    dob:'02/02/19820'  ,
+    occupation:Occupation.Author,  
+    rating:Rating.Professional,
+    factor :Factor.Professional,
     password: 'joe123'
 }];
 

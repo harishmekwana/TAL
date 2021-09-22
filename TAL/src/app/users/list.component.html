@@ -3,10 +3,12 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th style="width: 20%">Name</th>
-            <th style="width: 20%">Date of Birth</th>
-            <th style="width: 20%">Occupation</th>
-            <th style="width: 20%">Sum-Insured</th>
+            <th style="width: 15%">Name</th>
+            <th style="width: 10%">Birth Date</th>
+            <th style="width: 10%">Occupation</th>
+            <th style="width: 10%">Rating</th>
+            <th style="width: 10%">Factor</th>
+            <th style="width: 15%">Sum-Insured</th>
             <th style="width: 20%">Monthly-Premium</th>
             <th style="width: 10%">Action</th>
         </tr>
@@ -14,10 +16,13 @@
     <tbody>
         <tr *ngFor="let user of users">
             <td>{{user.title}} {{user.firstName}} {{user.lastName}}</td>
-            <td>{{user.email}}</td>            
+            <td>{{user.dob}}</td>            
             <td>{{user.occupation}}</td>
             <td>{{user.rating}}</td>
-            <td>{{user.rating}}</td>
+            <td>{{user.factor}}</td>
+            <td></td>
+            <td></td>
+            
 
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>

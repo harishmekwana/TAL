@@ -39,7 +39,7 @@ export class AddEditComponent implements OnInit {
             title: ['', Validators.required],
             firstName: ['', [Validators.required]] ,   
             lastName: ['', [Validators.required]] ,   
-            Age: ['', [Validators.required, Validators.pattern("^[0-9]*$")]] ,   
+            age: ['', [Validators.required, Validators.pattern("^[0-9]*$")]] ,   
             email: ['', [Validators.required, Validators.email]],
             factor: ['', Validators.required],            
             dob: ['', Validators.required],   
