@@ -1,51 +1,13 @@
-<div class='card'>
-  <div class='card-header'>
-    <h1>
-      Welcome to {{title}}!!
-    </h1>
-  </div>
-
-  <div class='card-body'   >
-    <div class='row'>
-      <div class='col-md-12'>
-        <div class='row'>
-          <div class='col-md-4'> <H2>Name: </H2></div>
-          <div class='col-md-8'> <input type='text'/> </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'><H2>Age: </H2></div>
-          <div class='col-md-8'> <input type='text'/></div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'><H2>Date of Birth: </H2></div>
-          <div class='col-md-8'> <input type='text'/> </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'><H2>Occupation: </H2></div>
-          <div class='col-md-8'> <input type='text'/> </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'><H2>Death – Sum Insured.: </H2></div>
-          <div class='col-md-8'> <input type='text'/> </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-12'>
-            <button class='btn btn-outline-secondary'
-            style='width:80px'
-            >
-      <i class='fa fa-chevron-left'></i> Back
-    </button>
-
-          </div>
-       
-        </div>
-      </div>
-
-   
+﻿<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Claims</a>
     </div>
-  </div>
+</nav>
 
-  <div class='card-footer'>
-   
-  </div>
+<!-- main app container -->
+<div class="app-container bg-light">
+    <alert></alert>
+    <router-outlet></router-outlet>
 </div>
