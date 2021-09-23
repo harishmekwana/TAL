@@ -6,10 +6,9 @@
             <label>Title</label>
             <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
                 <option value=""></option>
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Ms">Ms</option>
+                <option *ngFor='let title of titles' value={{title.titleID}} >
+                    {{title.desciption}} 
+                 </option>
             </select>
             <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                 <div *ngIf="f.title.errors.required">Title is required</div>
@@ -33,7 +32,7 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-3">
+        <div class="form-group col-6">
             <label>Email</label>
             <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -45,19 +44,13 @@
         <div class="form-group col-2">
             <label>Birth Date</label>
             <select formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
-                <option value="">Select</option>
-                <option value="Light Manual">Cleaner</option>
-                <option value="Professional">Doctor</option>
-                <option value="White Collar">Author</option>
-                <option value="Heavy Manual">Farmer</option>
-                <option value="Heavy Manual">Mechanic</option>
-                <option value="Light Manual">Florist</option>
+                <option value="">Select</option>             
             </select>
             <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
                 <div *ngIf="f.dob.errors.required">Birth Date is required</div>
             </div>
         </div>
-        <div class="form-group col-1">
+        <div class="form-group col-2">
             <label>Age</label>
             <input type="text" formControlName="age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
             <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
@@ -67,47 +60,20 @@
         </div>
         <div class="form-group col-2">
             <label>Occupation</label>
-            <select formControlName="occupation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }">
-                <option value="">Select</option>
-                <option value="Light Manual">Cleaner</option>
-                <option value="Professional">Doctor</option>
-                <option value="White Collar">Author</option>
-                <option value="Heavy Manual">Farmer</option>
-                <option value="Heavy Manual">Mechanic</option>
-                <option value="Light Manual">Florist</option>
+            <select formControlName="occupation" 
+            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }"
+            (change)="getSelected($event)"          
+            >                
+                <option *ngFor='let x of occupations'  [value]="x.factor" >
+                    {{x.desciption}} 
+                 </option>
             </select>
             <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
-                <div *ngIf="f.occupation.errors.required">Occupation is required</div>
-            </div>
+               <div *ngIf="f.occupation.errors.required">Occupation is required</div>
+            </div> 
+            <div> The rating for the selected occupation is {{selecteOccupationID}}</div>            
         </div>
-        <div class="form-group col-2">
-            <label>Rating</label>
-            <select formControlName="rating" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.rating.errors }">
-                <option value="">Select</option>
-                <option value="1.5">Light Manual</option>
-                <option value="1.0">Doctor</option>
-                <option value="1.25">Author</option>
-                <option value="1.75">Farmer</option>
-                <option value="1.75">Mechanic</option>
-                <option value="1.5">Florist</option>
-            </select>
-            <div *ngIf="submitted && f.rating.errors" class="invalid-feedback">
-                <div *ngIf="f.rating.errors.required">Rating is required</div>
-            </div>
-        </div>
-        <div class="form-group col-2">
-            <label>Factor</label>
-            <select formControlName="factor" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.factor.errors }">
-                <option value="">Select</option>
-                <option value="1.0">1.0</option>
-                <option value="1.25">1.25</option>
-                <option value="1.5">1.5</option>
-                <option value="1.75">1.75</option>                
-            </select>
-            <div *ngIf="submitted && f.factor.errors" class="invalid-feedback">
-                <div *ngIf="f.factor.errors.required">Factor is required</div>
-            </div>
-        </div>
+    
     </div>
  
     <div class="form-row">
