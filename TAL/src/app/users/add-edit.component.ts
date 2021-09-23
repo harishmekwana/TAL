@@ -5,10 +5,7 @@ import { first } from 'rxjs/operators';
 import { UserService, AlertService } from '@app/_services';
 import { MustMatch } from '@app/_helpers';
 import {OccupationClass} from '@app/_models/OccupationClass'
-import {RatingClass} from '@app/_models/RatingClass'
-import { FactorClass } from '@app/_models/FactorClass';
 import { TitleClass } from '@app/_models/TitleClass';
-
 
 
 @Component({ templateUrl: 'add-edit.component.html' })
@@ -20,7 +17,9 @@ export class AddEditComponent implements OnInit {
     submitted = false;
 
     selecteOccupationID:Number=0;
-    selectedRatingID:Number=0;
+    sumInsured:number=0;
+    monthlyPremium:Number=0;
+    age:number=42;
 
     occupations:OccupationClass[]=[
         {
@@ -151,10 +150,43 @@ export class AddEditComponent implements OnInit {
     getSelected (event: any) {
     //update the ui
     this.selecteOccupationID = event.target.value;
+    this.CalculateMonthlyPremium(Number(this.sumInsured),Number(this.selecteOccupationID),this.age)
   }
 
  
-  
+  onKeypressEvent(event: any){
+    console.log(event.target.value);
+    var charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return false;
+      } 
+     else {
+              
+      this.CalculateMonthlyPremium(Number(this.sumInsured),Number(this.selecteOccupationID),this.age)
+       return true;
+      }
+ }
+
+CalculateMonthlyPremium(_sumInsured:Number, _factor:number,_age:number) {
+    this.monthlyPremium=(Number(_sumInsured)*Number(_factor)*Number(_age))/1000*12
+
+}
+
+//  onKeyUpEvent(event: any){
+//     console.log(event.target.value);
+//     var charCode = (event.which) ? event.which : event.keyCode;
+//     if ((charCode < 48 || charCode > 57)) {
+//         event.preventDefault();
+//         return false;
+//       } 
+//      else {
+//          console.log("sumInsured"+this.sumInsured)
+//         this.monthlyPremium=(Number(event.target.value)*(Number(this.selecteOccupationID))*this.age)/1000 * 12
+//        return true;
+//       }
+//  }
+
 
 
 /*hardcoding ddl values */
@@ -178,55 +210,6 @@ titles:TitleClass[]=[
     },
 ]
 
-ratings:RatingClass[]=[
-    {
-        "ratingID":0,
-        "desciption":"Select",
-        "factorID":0
-    },
- 
-    {
-        "ratingID":1,
-        "desciption":"Professional",       
-        "factorID":1
-    },
-    {
-        "ratingID":2,
-        "desciption":"White Collar",       
-        "factorID":2
-    },
-    {
-        "ratingID":3,
-        "desciption":"Light Manual",       
-        "factorID":3
-    },
-    {
-        "ratingID":4,
-        "desciption":"Heavy Manual",       
-        "factorID":1.75
-    },
-]
 
-factors:FactorClass[]=[
-    {
-        "factorID":0,
-        "value":0
-    },
-    {
-        "factorID":1,
-        "value":1.0
-    },
-    {
-        "factorID":2,        
-        "value":1.25
-    },
-    {
-        "factorID":3,             
-        "value":1.5
-    },
-    {
-        "factorID":4,             
-        "value":1.75
-    },
-]
+
 }

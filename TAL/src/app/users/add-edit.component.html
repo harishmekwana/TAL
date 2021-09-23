@@ -42,7 +42,7 @@
         </div>      
         
         <div class="form-group col-2">
-            <label>Birth Date</label>
+            <label>Birth Date</label>            
             <select formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
                 <option value="">Select</option>             
             </select>
@@ -71,7 +71,7 @@
             <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
                <div *ngIf="f.occupation.errors.required">Occupation is required</div>
             </div> 
-            <div> The rating for the selected occupation is {{selecteOccupationID}}</div>            
+            <div> The rating for the selected occupation is  is {{selecteOccupationID}}</div>            
         </div>
     
     </div>
@@ -79,7 +79,14 @@
     <div class="form-row">
         <div class="form-group col">
             <label>Death – Sum Insured</label>
-            <input type="text" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <input type="text" formControlName="password"
+            (keypress)="onKeypressEvent($event)"        
+            
+            [(ngModel)]='sumInsured'
+            [value]="sumInsured"
+                    
+            
+            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Death – Sum Insured is required</div>                
                 <div *ngIf="f.password.errors.pattern">Enter only number.</div>
@@ -87,7 +94,11 @@
         </div>
         <div class="form-group col">
             <label>Monthly Premium</label>
-            <input type="text" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+            <input type="text" formControlName="confirmPassword"
+             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" 
+             [(ngModel)]='monthlyPremium'
+             [value]="monthlyPremium"
+             />
             <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                 <div *ngIf="f.confirmPassword.errors.required">Monthly Premium is required</div>                
                 <div *ngIf="f.confirmPassword.errors.pattern">Enter only number.</div>

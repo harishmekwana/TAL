@@ -11,13 +11,17 @@ import { ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
+import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,      
+        BrowserModule  ,
+        DatePickerModule
     ],
     declarations: [
         AppComponent,
