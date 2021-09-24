@@ -41,11 +41,11 @@
             </div>
         </div>      
         
-        <div class="form-group col-2">
-            <label>Birth Date</label>            
-            <select formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
-                <option value="">Select</option>             
-            </select>
+        <div class=" col-2">
+            <label>Birth Date</label>                
+            <ejs-datepicker formControlName="dob" 
+            (valueChange)="valuecheck($event)"  [max]='maxDate' 
+            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" ></ejs-datepicker>
             <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
                 <div *ngIf="f.dob.errors.required">Birth Date is required</div>
             </div>
@@ -64,12 +64,15 @@
         </div>
         <div class="form-group col-2">
             <label>Occupation</label>
+            <ejs-dropdownlist formControlName="skillname" name="skillname" [dataSource]='occupations'
+             floatLabelType='Auto'>
+            </ejs-dropdownlist>
             <select formControlName="occupation" 
             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }"
             (change)="getSelected($event)"          
             >                
                 <option *ngFor='let x of occupations'  [value]="x.factor" >
-                    {{x.desciption}} 
+                    {{x.description}} 
                  </option>
             </select>
             <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">

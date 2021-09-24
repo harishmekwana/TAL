@@ -17,47 +17,50 @@ export class AddEditComponent implements OnInit {
     isAddMode!: boolean;
     loading = false;
     submitted = false;
-
+    value: Date=new Date("2/1/2020");  
     selecteOccupationID:Number=0;
     sumInsured:number=0;
     monthlyPremium:Number=0; 
     age:number=0;
 
+public maxDate: Object =  new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+
     occupations:OccupationClass[]=[
         {
             "occupationID":0,
-            "desciption":"Select",
+            "description":"Select",
             "factor":1.5
         },
      
         {
             "occupationID":1,
-            "desciption":"Cleaner",
+            "description":"Cleaner",
             "factor":1.5
         },
         {
             "occupationID":2,
-            "desciption":"Doctor",
+            "description":"Doctor",
             "factor":1.0
         },
         {
             "occupationID":3,
-            "desciption":"Author",
+            "description":"Author",
             "factor":1.25        
         } ,
         {
             "occupationID":4,
-            "desciption":"Farmer",
+            "description":"Farmer",
             "factor":1.75
         },
         {
             "occupationID":5,
-            "desciption":"Mechanic",
+            "description":"Mechanic",
             "factor":1.75
         },
         {
             "occupationID":6,
-            "desciption":"Florist",
+            "description":"Florist",
             "factor":1.5
         }
     ];
@@ -68,6 +71,8 @@ export class AddEditComponent implements OnInit {
         private router: Router,
         private userService: UserService,
         private alertService: AlertService
+        
+
     ) {}
 
 
@@ -154,7 +159,14 @@ export class AddEditComponent implements OnInit {
     this.selecteOccupationID = event.target.value;
     this.CalculateMonthlyPremium(Number(this.sumInsured),Number(this.selecteOccupationID),this.age)
   }
-
+  valuecheck(args: any) {
+    this.value = args;
+    var date1 = new Date(args); 
+	var date2 = new Date();   
+    var Time = date2.getTime() - date1.getTime(); 
+    var Days = Time / (1000 * 36); //Diference in Days
+ 
+}
  
   onKeypressEvent(event: any){
     console.log(event.target.value);

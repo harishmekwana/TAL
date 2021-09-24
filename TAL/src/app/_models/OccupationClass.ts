@@ -1,7 +1,7 @@
 export interface OccupationClass
 {
      occupationID:number;
-     desciption:string;
+     description:string;
      factor:number;
 
 }
