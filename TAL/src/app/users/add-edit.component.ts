@@ -16,8 +16,7 @@ export class AddEditComponent implements OnInit {
     id!: string;
     isAddMode!: boolean;
     loading = false;
-    submitted = false;
-    value: Date=new Date("2/1/2020");  
+    submitted = false;   
     selecteOccupationID:Number=0;
     sumInsured:number=0;
     monthlyPremium:Number=0; 
@@ -77,17 +76,18 @@ public maxDate: Object =  new Date(new Date().getFullYear(), new Date().getMonth
 
 
 
-    ngOnInit() {        
+    ngOnInit() {   
+        this.age=0;     
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
         
-        // password not required in edit mode
-        const passwordValidators = [Validators.minLength(6)];
-        if (this.isAddMode) {
-            passwordValidators.push(Validators.required);
-        }
+        // // password not required in edit mode
+        // const passwordValidators = [Validators.minLength(6)];
+        // if (this.isAddMode) {
+        //     passwordValidators.push(Validators.required);
+        // }
 
-        const formOptions: AbstractControlOptions = { validators: MustMatch('password', 'confirmPassword') };
+        // const formOptions: AbstractControlOptions = { validators: MustMatch('password', 'confirmPassword') };
         this.form = this.formBuilder.group({
             title: ['', Validators.required],
             firstName: ['', [Validators.required]] ,   
@@ -98,9 +98,9 @@ public maxDate: Object =  new Date(new Date().getFullYear(), new Date().getMonth
             dob: ['', Validators.required],   
             occupation: ['', Validators.required],   
             // rating: ['', Validators.required],   
-            password:['', [Validators.required, Validators.pattern("^[0-9]*$")]] ,   
-            confirmPassword: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-        }, formOptions);
+            deathInsured:['', [Validators.required, Validators.pattern("^[0-9]*$")]] ,   
+            mPremium: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+        });
 
         if (!this.isAddMode) {
             this.userService.getById(this.id)
@@ -159,47 +159,39 @@ public maxDate: Object =  new Date(new Date().getFullYear(), new Date().getMonth
     this.selecteOccupationID = event.target.value;
     this.CalculateMonthlyPremium(Number(this.sumInsured),Number(this.selecteOccupationID),this.age)
   }
-  valuecheck(args: any) {
-    this.value = args;
-    var date1 = new Date(args); 
-	var date2 = new Date();   
-    var Time = date2.getTime() - date1.getTime(); 
-    var Days = Time / (1000 * 36); //Diference in Days
- 
-}
- 
-  onKeypressEvent(event: any){
-    console.log(event.target.value);
-    var charCode = (event.which) ? event.which : event.keyCode;
-    if ((charCode < 48 || charCode > 57)) {
-        event.preventDefault();
-        return false;
-      } 
-     else {
-              
+
+  valueCheck(args: any) {       
+    this.age =(new Date()).getFullYear()-(new Date(args)).getFullYear()  ;    
       this.CalculateMonthlyPremium(Number(this.sumInsured),Number(this.selecteOccupationID),this.age)
-       return true;
-      }
- }
+  } 
+
+  onBlurEvent(event: any){
+      this.CalculateMonthlyPremium(Number(this.sumInsured),Number(this.selecteOccupationID),this.age)      
+   }  
+
+     
+onKeypressEvent(event: any){
+console.log(event.target.value);
+var charCode = (event.which) ? event.which : event.keyCode;
+if ((charCode < 48 || charCode > 57)) {
+    event.preventDefault();
+    return false;
+    } 
+    else {
+            
+    this.CalculateMonthlyPremium(Number(this.sumInsured),Number(this.selecteOccupationID),this.age)
+    return true;
+    }
+}
+
+
 
 CalculateMonthlyPremium(_sumInsured:Number, _factor:number,_age:number) {
     this.monthlyPremium=(Number(_sumInsured)*Number(_factor)*Number(_age))/1000*12
 
 }
 
-//  onKeyUpEvent(event: any){
-//     console.log(event.target.value);
-//     var charCode = (event.which) ? event.which : event.keyCode;
-//     if ((charCode < 48 || charCode > 57)) {
-//         event.preventDefault();
-//         return false;
-//       } 
-//      else {
-//          console.log("sumInsured"+this.sumInsured)
-//         this.monthlyPremium=(Number(event.target.value)*(Number(this.selecteOccupationID))*this.age)/1000 * 12
-//        return true;
-//       }
-//  }
+
 
 
 

@@ -13,6 +13,7 @@ import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
         AppRoutingModule,      
         BrowserModule  ,
         DatePickerModule,
-        DropDownListModule
+        DropDownListModule,
+        NumericTextBoxModule
     ],
     declarations: [
         AppComponent,

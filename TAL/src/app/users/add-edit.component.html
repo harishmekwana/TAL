@@ -7,7 +7,7 @@
             <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
                 <option value=""></option>
                 <option *ngFor='let title of titles' value={{title.titleID}} >
-                    {{title.desciption}} 
+                    {{title.desciption}}
                  </option>
             </select>
             <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
@@ -39,23 +39,28 @@
                 <div *ngIf="f.email.errors.required">Email is required</div>
                 <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
             </div>
-        </div>      
-        
+        </div>
+
         <div class=" col-2">
-            <label>Birth Date</label>                
-            <ejs-datepicker formControlName="dob" 
-            (valueChange)="valuecheck($event)"  [max]='maxDate' 
+            <label>Birth Date</label>
+            <ejs-datepicker formControlName="dob"
+            (valueChange)="valueCheck($event)"
+            [max]='maxDate'
+            [value]='maxDate'
             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" ></ejs-datepicker>
             <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
                 <div *ngIf="f.dob.errors.required">Birth Date is required</div>
             </div>
         </div>
+
+        <!-- (keypress)="onKeypressEvent($event)" -->
         <div class="form-group col-2">
             <label>Age</label>
-            <input type="text" formControlName="age" 
-            [(ngModel)]='age'
+            <input type="text" formControlName="age"
             [value]="age"
-                 (keypress)="onKeypressEvent($event)"  
+           
+            (blur)="onBlurEvent($event)"
+            [(ngModel)]='age'
             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
             <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
                 <div *ngIf="f.age.errors.required">Age is required</div>
@@ -64,52 +69,60 @@
         </div>
         <div class="form-group col-2">
             <label>Occupation</label>
-            <ejs-dropdownlist formControlName="skillname" name="skillname" [dataSource]='occupations'
-             floatLabelType='Auto'>
-            </ejs-dropdownlist>
-            <select formControlName="occupation" 
+            <select formControlName="occupation"
             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }"
-            (change)="getSelected($event)"          
-            >                
+            (change)="getSelected($event)"
+            >
                 <option *ngFor='let x of occupations'  [value]="x.factor" >
-                    {{x.description}} 
+                    {{x.description}}
                  </option>
             </select>
             <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
                <div *ngIf="f.occupation.errors.required">Occupation is required</div>
-            </div>            
+            </div>
         </div>
-    
+
     </div>
- 
+
     <div class="form-row">
         <div class="form-group col">
             <label>Death – Sum Insured</label>
-            <input type="text" formControlName="password"
-            (keypress)="onKeypressEvent($event)"        
-            
+
+            <ejs-numerictextbox
+            formControlName="deathInsured"        
+            [validateDecimalOnType]='true' decimals='2'
+            class="form-control" 
+            [ngClass]="{ 'is-invalid': submitted && f.deathInsured.errors }"
+            (keypress)="onKeypressEvent($event)"
             [(ngModel)]='sumInsured'
             [value]="sumInsured"
-                    
-            
-            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Death – Sum Insured is required</div>                
-                <div *ngIf="f.password.errors.pattern">Enter only number.</div>
+            currency='AUD' 
+            format='n2'      
+            floatLabelType= 'Auto'></ejs-numerictextbox>
+            <div *ngIf="submitted && f.deathInsured.errors" class="invalid-feedback">
+                <div *ngIf="f.deathInsured.errors.required">Death – Sum Insured is required</div>
+                <div *ngIf="f.deathInsured.errors.pattern">Enter only number.</div>
             </div>
         </div>
         <div class="form-group col">
-            <label>Monthly Premium</label>           
-            
-            <input type="text" formControlName="confirmPassword"
-             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" 
-             [(ngModel)]='monthlyPremium'
-             [value]="monthlyPremium"
-             ng-currency
-             />
-            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                <div *ngIf="f.confirmPassword.errors.required">Monthly Premium is required</div>                
-                <div *ngIf="f.confirmPassword.errors.pattern">Enter only number.</div>
+            <label>Monthly Premium</label>
+
+            <ejs-numerictextbox
+            formControlName="mPremium"
+            aria-disabled="true"
+            [validateDecimalOnType]='true' decimals='2'
+            class="form-control" 
+            [ngClass]="{ 'is-invalid': submitted && f.mPremium.errors }"
+            [(ngModel)]='monthlyPremium'
+            [value]="monthlyPremium"
+            format='n2' 
+            floatLabelType= 'Auto'
+            currency='AUD' 
+            ></ejs-numerictextbox>
+
+            <div *ngIf="submitted && f.mPremium.errors" class="invalid-feedback">
+                <div *ngIf="f.mPremium.errors.required">Monthly Premium is required</div>
+                <!-- <div *ngIf="f.confirmPassword.errors.pattern">Enter only number.</div> -->
             </div>
         </div>
     </div>
