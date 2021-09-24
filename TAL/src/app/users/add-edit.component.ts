@@ -6,6 +6,8 @@ import { UserService, AlertService } from '@app/_services';
 import { MustMatch } from '@app/_helpers';
 import {OccupationClass} from '@app/_models/OccupationClass'
 import { TitleClass } from '@app/_models/TitleClass';
+import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { CurrencyPipe } from '@angular/common';
 
 
 @Component({ templateUrl: 'add-edit.component.html' })
@@ -18,8 +20,8 @@ export class AddEditComponent implements OnInit {
 
     selecteOccupationID:Number=0;
     sumInsured:number=0;
-    monthlyPremium:Number=0;
-    age:number=42;
+    monthlyPremium:Number=0; 
+    age:number=0;
 
     occupations:OccupationClass[]=[
         {
